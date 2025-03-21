@@ -23,22 +23,26 @@ public class TaskController {
 
     @PostMapping("/create")
     public Task createTask(@RequestBody Task task){
+        log.info("Received request to Create Task");
         return taskService.createTask(task);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Task> getTaskById(@PathVariable Long id){
+        log.info("Received request to Get Task with ID : {}",id);
         Task task = taskService.getTaskById(id);
         return ResponseEntity.ok(task);
     }
 
     @GetMapping("/getAllTask")
     public List<Task> getAllTasks(){
+        log.info("Received request to Get All Tasks");
         return taskService.getAllTask();
     }
 
     @GetMapping("/filter")
     public List<Task> searchTaskByFilters(@RequestParam(required = false) String status, @RequestParam(required = false) String priority){
+        log.info("Received request to Search Tasks Using Filters");
         List<Task> tasks = taskService.getTaskUsingFilter(status,priority);
         return taskService.getTaskUsingFilter(status,priority);
     }
@@ -53,6 +57,7 @@ public class TaskController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteTask(@PathVariable Long id){
+        log.info("Received request to Delete the Task with ID ; {}",id);
         taskService.deleteTaskById(id);
         return ResponseEntity.ok("Task DELETED Successfully");
     }
