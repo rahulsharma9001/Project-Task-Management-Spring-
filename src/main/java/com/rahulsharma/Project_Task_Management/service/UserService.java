@@ -49,8 +49,6 @@ public class UserService {
         existingUser.setActive(userDetails.getActive());
         existingUser.setRole(userDetails.getRole());
         existingUser.setEmail(userDetails.getEmail());
-//        existingUser.setUserId(userDetails.getUserId());
-
         return userRepository.save(existingUser);
     }
 

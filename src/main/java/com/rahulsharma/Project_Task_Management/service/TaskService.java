@@ -57,26 +57,6 @@ public class TaskService {
     }
 
 
-//    public Task updateTaskStatus(Long id, String status){
-//        Task task = taskRepository.findById(id)
-//                .orElseThrow(() -> new ResourceNotFoundException("Task is not present with ID : {}"));
-//        task.setStatus(status);
-//        return taskRepository.save(task);
-//    }
-
-//    public Task updateTasks(Long id, Task taskDetails) {
-//        Task existingTask = taskRepository.findById(id)
-//                .orElseThrow(() -> new ResourceNotFoundException("Task not found with ID: " + id));
-//
-//        // Update task fields
-//        existingTask.setTitle(taskDetails.getTitle());
-//        existingTask.setStatus(taskDetails.getStatus());
-//        existingTask.setPriority(taskDetails.getPriority());
-//
-//        return taskRepository.save(existingTask);
-//    }
-
-
     public void deleteTaskById(Long id){
         taskRepository.deleteById(id);
     }
