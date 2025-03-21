@@ -87,7 +87,7 @@ It allows **project managers** to create projects, assign tasks, and track progr
 ### Steps
 1. Clone the repository:
    ```bash
-   git clone https://github.com/rahulsharma9001/https://github.com/rahulsharma9001/Project-Task-Management-Spring-.git
+   git clone https://github.com/rahulsharma9001/Project-Task-Management-Spring-.git
    ```
 2. Build the Project:
    ```bash
