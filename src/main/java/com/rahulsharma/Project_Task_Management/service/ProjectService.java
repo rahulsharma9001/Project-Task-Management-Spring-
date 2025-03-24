@@ -11,6 +11,7 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -38,7 +39,7 @@ public class ProjectService {
         return projectRepository.save(project);
     }
 
-    @CachePut(value = "projects" , key = "#existingProject.id")
+    @CachePut(value = "projects" , key = "'existingProject.id'")
     public Project updateProject(Long id, Project projectDetails) {
         log.info("Updating Project in DATABASE and updating cache for ID: {}", id);
         Project existingProject = projectRepository.findById(id)
@@ -53,13 +54,14 @@ public class ProjectService {
     }
 
 
-    @Cacheable(value = "projects")
+    @CacheEvict(value = "projects", key = "'allProjects'")
     public List<Project> getAllProjects() {
         log.info("Fetching All Projects from DATABASE");
         return projectRepository.findAll();
     }
 
     @Cacheable(value = "projects" , key = "#id")
+    @Transactional
     public Optional<Project> getProjectById(Long id) {
         log.info("Fetching Project from DATABASE for ID : {}",id);
         if (id == null) {
