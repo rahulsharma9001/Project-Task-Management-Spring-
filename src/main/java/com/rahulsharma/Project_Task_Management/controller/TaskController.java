@@ -22,7 +22,7 @@ public class TaskController {
     }
 
     @PostMapping("/create")
-    public Task createTask(@RequestBody Task task){
+    public List<Task> createTask(@RequestBody Task task){
         log.info("Received request to Create Task");
         return taskService.createTask(task);
     }

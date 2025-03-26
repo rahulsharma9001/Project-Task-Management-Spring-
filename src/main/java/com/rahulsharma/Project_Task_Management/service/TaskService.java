@@ -6,6 +6,7 @@ import com.rahulsharma.Project_Task_Management.repository.TaskRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,8 +25,10 @@ public class TaskService {
         this.taskRepository = taskRepository;
     }
 
-    public Task createTask(Task task){
-        return taskRepository.save(task);
+    @CachePut(value = "tasks", key = "'allTasks'")
+    public List<Task> createTask(Task task){
+        taskRepository.save(task);
+        return taskRepository.findAll();
     }
 
     @Cacheable(value = "tasks", key = "'allTasks'")

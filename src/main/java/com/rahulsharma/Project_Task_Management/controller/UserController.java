@@ -21,7 +21,7 @@ public class UserController {
     }
 
     @PostMapping("/create")
-    public User createUser(@RequestBody User user){
+    public List<User> createUser(@RequestBody User user){
         log.info("Received request to Create a User");
         return userService.createUser(user);
     }

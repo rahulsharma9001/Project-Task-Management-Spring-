@@ -29,11 +29,13 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public User createUser(User user) {
-        return userRepository.save(user);
+    @CachePut(value = "users" , key = "'allusers'")
+    public List<User> createUser(User user) {
+        userRepository.save(user);
+        return userRepository.findAll();
     }
 
-    @CacheEvict(value = "users" , key = "'allusers'")
+    @Cacheable(value = "users" , key = "'allusers'")
 //    @Transactional
     public List<User> getAllUsers() {
         log.info("Fetching ALL users from DATABASE");

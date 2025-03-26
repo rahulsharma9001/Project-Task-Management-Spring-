@@ -30,6 +30,7 @@ public class ProjectService {
         this.userRepository = userRepository;
     }
 
+    @CachePut(value = "projects" , key = "'allProjects'")
     public Project CreateProject(Project project) {
         User user = userRepository.findById(project.getCreatedBy().getUserId())
                 .orElseThrow(() -> new ResourceNotFoundException("User not found with ID: " + project.getCreatedBy().getUserId()));
