@@ -22,7 +22,8 @@ public class SecurityConfig {
                 .requestMatchers("/tasks/**").authenticated()
                 .requestMatchers("/user/**").permitAll());
 
-        httpSecurity.formLogin(Customizer.withDefaults());
+        httpSecurity.csrf(csrf -> csrf.disable());
+        httpSecurity.formLogin(frmlogin -> frmlogin.disable());
         httpSecurity.httpBasic(Customizer.withDefaults());
         return httpSecurity.build();
     }
