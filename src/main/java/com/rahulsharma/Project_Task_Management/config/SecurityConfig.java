@@ -17,15 +17,27 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity httpSecurity) throws Exception{
-        httpSecurity.authorizeHttpRequests((requests) -> requests
-                .requestMatchers("/project/**").authenticated()
-                .requestMatchers("/tasks/**").authenticated()
-                .requestMatchers("/user/**").permitAll());
-
-        httpSecurity.csrf(csrf -> csrf.disable());
-        httpSecurity.formLogin(frmlogin -> frmlogin.disable());
-        httpSecurity.httpBasic(Customizer.withDefaults());
-        return httpSecurity.build();
+//        httpSecurity.authorizeHttpRequests((requests) -> requests
+//                .requestMatchers("/project/**").authenticated()
+//                .requestMatchers("/tasks/**").authenticated()
+//                .requestMatchers("/user/**").permitAll());
+//
+//        httpSecurity.csrf(csrf -> csrf.disable());
+//
+////        httpSecurity.formLogin(frmlogin -> frmlogin.disable());
+//        httpSecurity.formLogin(Customizer.withDefaults());
+//        httpSecurity.httpBasic(Customizer.withDefaults());
+//        return httpSecurity.build();
+        return httpSecurity
+                .authorizeHttpRequests(registry -> {
+//                    registry.requestMatchers("/user/**").permitAll();
+                    registry.requestMatchers("/project/**").authenticated();
+                    registry.requestMatchers("/tasks/**").authenticated();
+                    registry.requestMatchers("/user/**").permitAll();
+                })
+                .oauth2Login(Customizer.withDefaults())
+                .formLogin(Customizer.withDefaults())
+                .build();
     }
 
     @Bean
