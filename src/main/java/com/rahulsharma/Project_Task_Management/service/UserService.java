@@ -57,7 +57,6 @@ public class UserService {
         log.info("Updating user in DATABASE and updating cache for ID: {}", id);
         User existingUser = userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found with ID: " + id));
-
         existingUser.setUsername(userDetails.getUsername());
         existingUser.setActive(userDetails.getActive());
         existingUser.setRole(userDetails.getRole());
